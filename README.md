@@ -1,13 +1,13 @@
 # PHP PDO Ussage
 
-## Database Connection
+## Database Connection (veritabanı bağlantısı kurma)
     try {
         $db = new PDO("mysql:host=localhost;dbname=DB_NAME;charset=utf8", "root", "PASSWORD");
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
     
-## Multiple Select
+## Multiple Select (çoklu seçme)
     $query = $db->query("SELECT * FROM TABLE_NAME", PDO::FETCH_OBJ);
     if ($query->rowCount()) {
         foreach ($query as $row) {
@@ -17,7 +17,7 @@
         echo 'ERROR';
     }
     
-## Single Select
+## Single Select (tekli seçme)
     $query = $db->query("SELECT * FROM TABLE_NAME")->fetch(PDO::FETCH_OBJ);
     if ($query) {
         print_r($query);
@@ -25,7 +25,7 @@
         echo 'ERROR';
     }
 
-## Insert
+## Insert (kayıt)
     $query = $db->prepare("INSERT INTO TABLE_NAME SET COLUMN_NAME = ?, COLUMN_NAME = ?");
     $insert = $query->execute(array("DATA", "DATA"));
     if ($insert) {
@@ -34,7 +34,7 @@
         echo 'ERROR';
     }
 
-## Update 
+## Update (güncelleme)
     $query = $db->prepare("UPDATE TABLE_NAME SET COLUMN_NAME = ?, COLUMN_NAME = ? WHERE id = 1");
     $update = $query->execute(array("DATA", "DATA"));
     if ($update) {
@@ -43,7 +43,7 @@
         echo 'ERROR';
     }
 
-## Multiple Delete
+## Multiple Delete (çoklu silme)
     $delete = $db->exec("DELETE FROM TABLE_NAME");
     if ($delete) {
         echo $delete;
@@ -51,7 +51,7 @@
         echo 'ERROR';
     }
     
-## Single Delete
+## Single Delete (tekli silme)
     $query = $db->prepare("DELETE FROM TABLE_NAME WHERE id = ?");
     $delete = $query->execute(array("DATA"));
     if ($delete) {
@@ -60,5 +60,5 @@
         echo 'ERROR';
     }
     
- ## Close Database Connection
+ ## Close Database Connection (veritabanı bağlantısını sonlandırma)
     $db = null;
